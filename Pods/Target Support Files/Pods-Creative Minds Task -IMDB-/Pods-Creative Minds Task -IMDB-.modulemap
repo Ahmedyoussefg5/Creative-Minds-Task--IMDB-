@@ -1,0 +1,6 @@
+framework module Pods_Creative_Minds_Task__IMDB_ {
+  umbrella header "Pods-Creative Minds Task -IMDB--umbrella.h"
+
+  export *
+  module * { export * }
+}
