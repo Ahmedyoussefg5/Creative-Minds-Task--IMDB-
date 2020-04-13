@@ -107,6 +107,7 @@ class AllMoviesViewController: UITableViewController, AllMoviesViewProtocol {
 // MARK: - Collection view data source + Delegate
 
 extension AllMoviesViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter.getTypesCount()
     }
@@ -128,6 +129,7 @@ extension AllMoviesViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.selectType(at: indexPath.item)
         collectionView.reloadData()
+        indexForExpandedCell = nil
         presenter.getDataForSelectedType()
     }
 }

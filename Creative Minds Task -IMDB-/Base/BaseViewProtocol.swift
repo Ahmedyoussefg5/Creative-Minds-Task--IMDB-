@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-protocol BaseViewProtocol where Self: UIViewController {
+protocol BaseViewProtocol: NVActivityIndicatorViewable where Self: UIViewController {
     func showActivityIndicator()
     func hideActivityIndicator()
     func showAlert(with message: String)
@@ -16,18 +17,15 @@ protocol BaseViewProtocol where Self: UIViewController {
 
 extension BaseViewProtocol {
     
-    func showActivityIndicator() {
-        let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicatorView.color = #colorLiteral(red: 0.3346029818, green: 0.3666692972, blue: 0.9529878497, alpha: 1)
-        // Useing Tag Is Bad // To Fix
-        activityIndicatorView.tag = 98777
-        activityIndicatorView.startAnimating()
-        view.addSubview(activityIndicatorView)
-        activityIndicatorView.centerInSuperview()
+    func showActivityIndicator() {        
+        let size = CGSize(width: 50, height: 50)
+        NVActivityIndicatorView.DEFAULT_COLOR = #colorLiteral(red: 0.3346029818, green: 0.3666692972, blue: 0.9529878497, alpha: 1)
+        NVActivityIndicatorView.DEFAULT_BLOCKER_BACKGROUND_COLOR = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        startAnimating(size, message: "", type: NVActivityIndicatorType.ballClipRotate )
     }
     
     func hideActivityIndicator() {
-        view.viewWithTag(98777)?.removeFromSuperview()
+        stopAnimating()
     }
     
     func showAlert(with message: String) {
