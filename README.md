@@ -12,8 +12,12 @@ Just hit run, no need to pod install.
 
 ## Design Patterns
 
-MVP
+MVP,
 Repository Design Pattern
+
+## Design Patterns
+
+Alamofire with codable and abstract layer to implement SOLD.
 
 ## Code Style
 I avoided storyboards and used anchor constraints with some extensions to make it easier.
