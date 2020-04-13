@@ -12,36 +12,12 @@ protocol AllMoviesViewProtocol: BaseViewProtocol {
     func dataTaskDone()
 }
 
-class AllMoviesViewController: UITableViewController, AllMoviesViewProtocol, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class AllMoviesViewController: UITableViewController, AllMoviesViewProtocol {
     
     var indexForExpandedCell: Int?
     
     func dataTaskDone() {
         tableView.reloadData()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.getTypesCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesTypesSliderCollectionViewCell", for: indexPath) as! MoviesTypesSliderCollectionViewCell
-        cell.config(presenter.getDataFor(index: indexPath.item))
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 130, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.selectType(at: indexPath.item)
-        collectionView.reloadData()
-        presenter.getDataForSelectedType()
     }
     
     private var topTypesCollectionView = HCollectionView()
@@ -58,14 +34,23 @@ class AllMoviesViewController: UITableViewController, AllMoviesViewProtocol, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        presenter.getDataForSelectedType()
+    }
+    
+    fileprivate func setup() {
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
+        
         topTypesCollectionView.register(MoviesTypesSliderCollectionViewCell.self, forCellWithReuseIdentifier: "MoviesTypesSliderCollectionViewCell")
         topTypesCollectionView.delegate = self
         topTypesCollectionView.dataSource = self
         topTypesCollectionView.showsHorizontalScrollIndicator = false
-        
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
-        
-        presenter.getDataForSelectedType()
+    }
+    
+    fileprivate func getTextHeight(at index: Int) -> CGFloat {
+        let font: UIFont = .systemFont(ofSize: 13, weight: .medium)
+        let text = presenter.getMovie(at: index)?.overview ?? ""
+        return text.height(withConstrainedWidth: tableView.frame.width * 0.8, font: font)
     }
     
     // MARK: - Table view data source + Delegate
@@ -85,11 +70,7 @@ class AllMoviesViewController: UITableViewController, AllMoviesViewProtocol, UIC
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let indexForExpandedCell = indexForExpandedCell {
             if indexPath.row == indexForExpandedCell {
-                let font: UIFont = .systemFont(ofSize: 13, weight: .medium)
-                let text = presenter.getMovie(at: indexPath.row)?.overview ?? ""
-                let height = text.height(withConstrainedWidth: tableView.frame.width * 0.8, font: font)
-                
-                return height + 190
+                return getTextHeight(at: indexPath.row) + 190
             }
         }
         return 170
@@ -123,6 +104,36 @@ class AllMoviesViewController: UITableViewController, AllMoviesViewProtocol, UIC
     }
 }
 
+// MARK: - Collection view data source + Delegate
+
+extension AllMoviesViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.getTypesCount()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesTypesSliderCollectionViewCell", for: indexPath) as! MoviesTypesSliderCollectionViewCell
+        cell.config(presenter.getDataFor(index: indexPath.item))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: 130, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.selectType(at: indexPath.item)
+        collectionView.reloadData()
+        presenter.getDataForSelectedType()
+    }
+}
+
+// MARK: - Create
+
 extension AllMoviesViewController {
     // Create class and its dependcies
     class func create(selectedType: MovieType) -> AllMoviesViewController {
@@ -134,27 +145,3 @@ extension AllMoviesViewController {
         return view
     }
 }
-
-extension CALayer {
-    func applySketchShadow(
-        color: UIColor = UIColor.lightGray.withAlphaComponent(0.4),
-        alpha: Float = 1,
-        x: CGFloat = 0,
-        y: CGFloat = 3,
-        blur: CGFloat = 2,
-        spread: CGFloat = 0) {
-        shadowColor = color.cgColor
-        shadowOpacity = alpha
-        shadowOffset = CGSize(width: x, height: y)
-        shadowRadius = blur / 2.0
-        if spread == 0 {
-            shadowPath = nil
-        } else {
-            let dx = -spread
-            let rect = bounds.insetBy(dx: dx, dy: dx)
-            shadowPath = UIBezierPath(rect: rect).cgPath
-        }
-    }
-}
-
-

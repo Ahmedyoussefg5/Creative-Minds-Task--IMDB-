@@ -9,16 +9,6 @@
 import Foundation
 import Alamofire
 
-class MoviesTypesViewModel {
-    var type: MovieType
-    var isSelected: Bool
-    
-    init(type: MovieType, isSelected: Bool) {
-        self.type = type
-        self.isSelected = isSelected
-    }
-}
-
 protocol AllMoviesPresenterProtocol {
     func getDataForSelectedType()
     func getTypesCount() -> Int
@@ -62,12 +52,10 @@ class AllMoviesPresenter: AllMoviesPresenterProtocol {
         }
     }
     
-    
     func selectType(at index: Int) {
         _ = moviesTypesViewModel.map({ $0.isSelected = false })
         moviesTypesViewModel[index].isSelected = true
     }
-    
     
     func getTypesCount() -> Int {
         return moviesTypesViewModel.count
@@ -88,7 +76,6 @@ class AllMoviesPresenter: AllMoviesPresenterProtocol {
         .init(type: .comingSoon, isSelected: false),
         .init(type: .nowPlaying, isSelected: false),
     ]
-    
     
     init(view: AllMoviesViewProtocol, authRepository: HomeRepositoryProtocol, selectedType: MovieType) {
         self.view = view
@@ -131,28 +118,28 @@ class AllMoviesPresenter: AllMoviesPresenterProtocol {
         }
     }
     
-    func getTopRated() {
+    fileprivate func getTopRated() {
         homeRepository.getTopRated {[weak self] result in
             self?.movieLists.topRated = self?.handleResponse(result)
             self?.view?.dataTaskDone()
         }
     }
     
-    func getPopular() {
+    fileprivate func getPopular() {
         homeRepository.getPopular {[weak self] result in
             self?.movieLists.popular = self?.handleResponse(result)
             self?.view?.dataTaskDone()
         }
     }
     
-    func getUpcoming() {
+    fileprivate func getUpcoming() {
         homeRepository.getUpcoming {[weak self] result in
             self?.movieLists.upcoming = self?.handleResponse(result)
             self?.view?.dataTaskDone()
         }
     }
     
-    func getNowPlaying() {
+    fileprivate func getNowPlaying() {
         homeRepository.getNowPlaying {[weak self] result in
             self?.movieLists.nowPlaying = self?.handleResponse(result)
             self?.view?.dataTaskDone()

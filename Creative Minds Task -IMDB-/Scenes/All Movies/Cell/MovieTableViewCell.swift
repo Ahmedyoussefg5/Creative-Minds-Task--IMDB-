@@ -18,8 +18,7 @@ class MovieTableViewCell: UITableViewCell {
     private let rateLable = UILabel()
     
     private let descLable = UILabel()
-
-
+    
     fileprivate func setupCellView() {
         selectionStyle = .none
         

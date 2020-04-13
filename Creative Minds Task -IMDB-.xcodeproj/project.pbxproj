@@ -26,6 +26,8 @@
 		E8884BFF2443D22600C39AF0 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8884BFE2443D22600C39AF0 /* UIImageView+.swift */; };
 		E8B19AF324451B35004AA32D /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B19AF224451B35004AA32D /* MovieTableViewCell.swift */; };
 		E8B19AF42445283E004AA32D /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F51C5A22FD6EE5007D38FE /* UIButton.swift */; };
+		E8B19AF624452D76004AA32D /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B19AF524452D76004AA32D /* CALayer+.swift */; };
+		E8B19AF824452E7A004AA32D /* MoviesTypesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B19AF724452E7A004AA32D /* MoviesTypesViewModel.swift */; };
 		E8C359A5244513C100116EB4 /* MoviesTypesSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C359A4244513C100116EB4 /* MoviesTypesSliderCollectionViewCell.swift */; };
 		E8E1AAF12443DE0E0096061B /* MovieRowsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E1AAF02443DE0E0096061B /* MovieRowsState.swift */; };
 		E8F51C4022FD6C87007D38FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F51C3F22FD6C87007D38FE /* AppDelegate.swift */; };
@@ -66,6 +68,8 @@
 		E8884BFC2443D11600C39AF0 /* MovieLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLists.swift; sourceTree = "<group>"; };
 		E8884BFE2443D22600C39AF0 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		E8B19AF224451B35004AA32D /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		E8B19AF524452D76004AA32D /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		E8B19AF724452E7A004AA32D /* MoviesTypesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTypesViewModel.swift; sourceTree = "<group>"; };
 		E8C359A4244513C100116EB4 /* MoviesTypesSliderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTypesSliderCollectionViewCell.swift; sourceTree = "<group>"; };
 		E8E1AAF02443DE0E0096061B /* MovieRowsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRowsState.swift; sourceTree = "<group>"; };
 		E8F51C3C22FD6C87007D38FE /* Creative Minds Task -IMDB-.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creative Minds Task -IMDB-.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +213,7 @@
 			children = (
 				E8884BFC2443D11600C39AF0 /* MovieLists.swift */,
 				E8E1AAF02443DE0E0096061B /* MovieRowsState.swift */,
+				E8B19AF724452E7A004AA32D /* MoviesTypesViewModel.swift */,
 			);
 			path = "Local Model";
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 				E8F51C7822FD72DE007D38FE /* Alert.swift */,
 				C73945392300193900144C57 /* ErrorExtension.swift */,
 				E8884BFE2443D22600C39AF0 /* UIImageView+.swift */,
+				E8B19AF524452D76004AA32D /* CALayer+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -442,8 +448,10 @@
 				E83D195424450557006FF327 /* HomeTableHeaderView.swift in Sources */,
 				C739453C23001A6E00144C57 /* RequestExtension.swift in Sources */,
 				E83D195B244505A6006FF327 /* HCollectionView.swift in Sources */,
+				E8B19AF824452E7A004AA32D /* MoviesTypesViewModel.swift in Sources */,
 				E8F51C4222FD6C87007D38FE /* HomeViewController.swift in Sources */,
 				E8F51C7722FD7024007D38FE /* Movie.swift in Sources */,
+				E8B19AF624452D76004AA32D /* CALayer+.swift in Sources */,
 				E8C359A5244513C100116EB4 /* MoviesTypesSliderCollectionViewCell.swift in Sources */,
 				E8F51C6D22FD7008007D38FE /* JSONCodable.swift in Sources */,
 				E8884BFD2443D11600C39AF0 /* MovieLists.swift in Sources */,
