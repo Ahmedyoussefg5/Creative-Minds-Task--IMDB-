@@ -18,9 +18,34 @@ protocol HomePresenterProtocol {
     func getNowPlayingMoviesCount() -> Int
     
     func getData(for type: MovieType) -> [Movie]
+    
+    func getmovieTypesCount() -> Int
+    func getmovieType(at index: Int) -> MovieRowsState
+    
+    func handelArrowAction(_ type: MovieType)
 }
 
 class HomePresenter: HomePresenterProtocol {
+    
+    func getmovieTypesCount() -> Int {
+        return movieTypes.count
+    }
+    
+    func getmovieType(at index: Int) -> MovieRowsState {
+        return movieTypes[index]
+    }
+    
+    func handelArrowAction(_ type: MovieType) {
+        if let data = movieTypes.first(where: { $0.type == type }) {
+            if data.isExpanded {
+                data.isExpanded.toggle()
+                view?.deleteRow(at: type.sectionNumber)
+            } else {
+                data.isExpanded.toggle()
+                view?.indsertRow(at: type.sectionNumber)
+            }
+        }
+    }
     
     func getData(for type: MovieType) -> [Movie] {
         switch type {
@@ -56,6 +81,13 @@ class HomePresenter: HomePresenterProtocol {
     private let homeRepository: HomeRepositoryProtocol
     
     private lazy var movieLists = MovieLists(popular: [], topRated: [], upcoming: [], nowPlaying: [])
+    
+    private lazy var movieTypes: [MovieRowsState] = [
+        .init(type: .topRated),
+        .init(type: .popular),
+        .init(type: .comingSoon),
+        .init(type: .nowPlaying)
+    ]
     
     init(view: HomeViewProtocol, authRepository: HomeRepositoryProtocol) {
         self.view = view

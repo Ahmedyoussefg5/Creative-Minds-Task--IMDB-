@@ -12,7 +12,7 @@
 		C7032673230013CF00E38FA9 /* BaseViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7032672230013CF00E38FA9 /* BaseViewProtocol.swift */; };
 		C7032679230014E100E38FA9 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7032678230014E100E38FA9 /* HomeRepository.swift */; };
 		C7394532230015BA00144C57 /* URLRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7394531230015BA00144C57 /* URLRequestConvertible.swift */; };
-		C7394534230015EA00144C57 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7394533230015EA00144C57 /* AuthRouter.swift */; };
+		C7394534230015EA00144C57 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7394533230015EA00144C57 /* AppRouter.swift */; };
 		C73945382300182E00144C57 /* NetworkMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73945372300182E00144C57 /* NetworkMiddleware.swift */; };
 		C739453A2300193900144C57 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73945392300193900144C57 /* ErrorExtension.swift */; };
 		C739453C23001A6E00144C57 /* RequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739453B23001A6E00144C57 /* RequestExtension.swift */; };
@@ -54,7 +54,7 @@
 		C7032672230013CF00E38FA9 /* BaseViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewProtocol.swift; sourceTree = "<group>"; };
 		C7032678230014E100E38FA9 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		C7394531230015BA00144C57 /* URLRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConvertible.swift; sourceTree = "<group>"; };
-		C7394533230015EA00144C57 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
+		C7394533230015EA00144C57 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C73945372300182E00144C57 /* NetworkMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMiddleware.swift; sourceTree = "<group>"; };
 		C73945392300193900144C57 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		C739453B23001A6E00144C57 /* RequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExtension.swift; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		C73945302300158900144C57 /* Routers */ = {
 			isa = PBXGroup;
 			children = (
-				C7394533230015EA00144C57 /* AuthRouter.swift */,
+				C7394533230015EA00144C57 /* AppRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -459,7 +459,7 @@
 				E83D19572445057A006FF327 /* HomeMoviesCell.swift in Sources */,
 				E83D195E24450600006FF327 /* AllMoviesViewController.swift in Sources */,
 				E8E1AAF12443DE0E0096061B /* MovieRowsState.swift in Sources */,
-				C7394534230015EA00144C57 /* AuthRouter.swift in Sources */,
+				C7394534230015EA00144C57 /* AppRouter.swift in Sources */,
 				E8F51C4022FD6C87007D38FE /* AppDelegate.swift in Sources */,
 				C7394532230015BA00144C57 /* URLRequestConvertible.swift in Sources */,
 			);

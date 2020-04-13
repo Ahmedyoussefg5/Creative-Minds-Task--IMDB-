@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol MovieSelectProtocol: class {
+    func select(at id: Int)
+}
+
 class HomeMoviesCell: UITableViewCell, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     private let collectionView = HCollectionView()
+    
+    weak var delegate: MovieSelectProtocol?
     
     var data: [Movie] = [] {
         didSet {
@@ -34,6 +40,12 @@ class HomeMoviesCell: UITableViewCell, UICollectionViewDelegateFlowLayout, UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let id = data[indexPath.row].id {
+            delegate?.select(at: id)
+        }
     }
         
     fileprivate func setupCellView() {

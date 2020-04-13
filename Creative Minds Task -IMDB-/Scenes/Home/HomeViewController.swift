@@ -10,22 +10,13 @@ import UIKit
 
 protocol HomeViewProtocol: BaseViewProtocol {
     func dataTaskSuccess()
+    func indsertRow(at index: Int)
+    func deleteRow(at index: Int)
 }
 
 class HomeViewController: UITableViewController, HomeViewProtocol {
     
-    func dataTaskSuccess() {
-        tableView.reloadData()
-    }
-    
     private var presenter: HomePresenterProtocol!
-    
-    private lazy var movieTypes: [MovieRowsState] = [
-        .init(type: .topRated),
-        .init(type: .popular),
-        .init(type: .comingSoon),
-        .init(type: .nowPlaying)
-    ]
     
     // Prevent the creation of the ViewController outside of the "create" method"
     private init() {
@@ -42,33 +33,37 @@ class HomeViewController: UITableViewController, HomeViewProtocol {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red, .font: UIFont.systemFont(ofSize: 15, weight: .bold)]
         title = "Creative Minds Task -IMDB-"
         
-        // Should Be Button To Navigate User to His Profile
-        let profileImageView = UIImageView(image: #imageLiteral(resourceName: "placeHolder")).withSize(.allSides(side: 40))
-        profileImageView.layer.cornerRadius = 20
-        profileImageView.clipsToBounds = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileImageView)
+        createProfileNavItem()
         
         tableView.register(HomeMoviesCell.self, forCellReuseIdentifier: "HomeMoviesCell")
         presenter.getData()
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = HomeTableHeaderView(state: movieTypes[section])
-        view.arrowAction = handelArrowAction
-        view.seeAllAction = handelSeeAllAction
-        return view
+    fileprivate func createProfileNavItem() {
+        // Should Be Button To Navigate User to His Profile
+        let profileImageView = UIImageView(image: #imageLiteral(resourceName: "placeHolder")).withSize(.allSides(side: 40))
+        profileImageView.layer.cornerRadius = 20
+        profileImageView.clipsToBounds = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileImageView)
     }
     
-    private func handelArrowAction(_ type: MovieType) {
-        if let data = movieTypes.first(where: { $0.type == type }) {
-            if data.isExpanded {
-                data.isExpanded.toggle()
-                tableView.deleteRows(at: [.init(row: 0, section: type.sectionNumber)], with: .top)
-            } else {
-                data.isExpanded.toggle()
-                tableView.insertRows(at: [.init(row: 0, section: type.sectionNumber)], with: .top)
-            }
-        }
+    func indsertRow(at index: Int) {
+        tableView.insertRows(at: [.init(row: 0, section: index)], with: .top)
+    }
+    
+    func deleteRow(at index: Int) {
+        tableView.deleteRows(at: [.init(row: 0, section: index)], with: .top)
+    }
+    
+    func dataTaskSuccess() {
+        tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = HomeTableHeaderView(state: presenter.getmovieType(at: section))
+        view.arrowAction = presenter.handelArrowAction
+        view.seeAllAction = handelSeeAllAction
+        return view
     }
     
     private func handelSeeAllAction(_ type: MovieType) {
@@ -77,7 +72,8 @@ class HomeViewController: UITableViewController, HomeViewProtocol {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeMoviesCell", for: indexPath) as! HomeMoviesCell
-        cell.data = presenter.getData(for: movieTypes[indexPath.section].type)
+        cell.data = presenter.getData(for: presenter.getmovieType(at: indexPath.section).type)
+        cell.delegate = self
         return cell
     }
     
@@ -90,11 +86,18 @@ class HomeViewController: UITableViewController, HomeViewProtocol {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return movieTypes[indexPath.section].isExpanded ? 200 : 0
+        return presenter.getmovieType(at: indexPath.section).isExpanded ? 200 : 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieTypes[section].isExpanded ? 1 : 0
+        return presenter.getmovieType(at: section).isExpanded ? 1 : 0
+    }
+}
+
+extension HomeViewController: MovieSelectProtocol {
+    func select(at id: Int) {
+        // GO TO MOVIE DETAILS VC with id
+        navigationController?.pushViewController(UIViewController(), animated: true)
     }
 }
 
