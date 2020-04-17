@@ -21,7 +21,7 @@ extension BaseViewProtocol {
         let size = CGSize(width: 50, height: 50)
         NVActivityIndicatorView.DEFAULT_COLOR = #colorLiteral(red: 0.3346029818, green: 0.3666692972, blue: 0.9529878497, alpha: 1)
         NVActivityIndicatorView.DEFAULT_BLOCKER_BACKGROUND_COLOR = .clear
-        startAnimating(size, message: "", type: NVActivityIndicatorType.ballClipRotate )
+        startAnimating(size, message: "", type: .ballClipRotate)
     }
     
     func hideActivityIndicator() {
